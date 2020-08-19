@@ -69,7 +69,9 @@ public class ServiceProviderImpl implements ServiceProvider {
             Class<?> serviceRelatedInterface = service.getClass().getInterfaces()[0];
             String serviceName = serviceRelatedInterface.getCanonicalName();
             rpcServiceProperties.setServiceName(serviceName);
+            //注册到本地
             this.addService(service, serviceRelatedInterface, rpcServiceProperties);
+            //注册到zk
             serviceRegistry.registerService(rpcServiceProperties.toRpcServiceName(), new InetSocketAddress(host, NettyServer.PORT));
         } catch (UnknownHostException e) {
             log.error("occur exception when getHostAddress", e);

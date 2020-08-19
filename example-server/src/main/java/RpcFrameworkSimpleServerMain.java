@@ -13,8 +13,12 @@ public class RpcFrameworkSimpleServerMain {
         HelloService helloService = new HelloServiceImpl();
         SocketRpcServer socketRpcServer = new SocketRpcServer();
         RpcServiceProperties rpcServiceProperties = RpcServiceProperties.builder()
-                .group("test2").version("version2").build();
+                .group("test2")
+                .version("version2")
+                .build();
+        //服务注册
         socketRpcServer.registerService(helloService, rpcServiceProperties);
+        // 启动服务端
         socketRpcServer.start();
     }
 }
